@@ -29,16 +29,16 @@ window.OverworldMaps = {
         x: utils.withGrid(8),
         y: utils.withGrid(5),
       }),
-      npc1: new Person({
-        x: utils.withGrid(5),
-        y: utils.withGrid(8),
-        src: "images/characters/people/npc1.png"
-      }),
-      npc2: new Person({
-        x: utils.withGrid(2),
-        y: utils.withGrid(5),
-        src: "images/characters/people/npc3.png"
-      })
+      // npc1: new Person({
+      //   x: utils.withGrid(5),
+      //   y: utils.withGrid(8),
+      //   src: "images/characters/people/npc1.png"
+      // }),
+      // npc2: new Person({
+      //   x: utils.withGrid(2),
+      //   y: utils.withGrid(5),
+      //   src: "images/characters/people/npc3.png"
+      // })
     }
   },
   Kitchen: {
