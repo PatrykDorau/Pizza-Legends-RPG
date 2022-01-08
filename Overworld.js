@@ -41,24 +41,47 @@ class Overworld {
      }
      step();
   }
+
+  bindActionInput() {
+    new KeyPressListener("Enter", () => {
+      //Czy jest tu ktos do kogo mozna mowic?
+      this.map.checkForActionCutScene()
+    })
+  }
+
+  bindHeroPositionCheck() {
+    document.addEventListener("PersonWalkingComplete", e => {
+      if(e.detail.whoId === "hero") {
+        this.map.checkForFootStepCutScene()
+      }
+    })
+  }
+  startMap(mapConfig) {
+    this.map = new OverworldMap(mapConfig);
+    this.map.overworld = this;
+    this.map.mountObjects();
+  }
  
   init() {
-   this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
-   this.map.mountObjects();
+   this.startMap(window.OverworldMaps.DemoRoom)
+
+   this.bindActionInput();
+   this.bindHeroPositionCheck();
  
    this.directionInput = new DirectionInput();
    this.directionInput.init();
  
    this.startGameLoop();
  
-   this.map.startCutScene([
-     { who: "hero", type: "walk",  direction: "down" },
-     { who: "hero", type: "walk",  direction: "down" },
-     { who: "npcA", type: "walk",  direction: "left" },
-     { who: "npcA", type: "walk",  direction: "left" },
-     { who: "npcA", type: "walk",  direction: "left" },
-     { who: "npcA", type: "stand",  direction: "up", time: 800 },
-   ])
+  //  this.map.startCutScene([
+  //    { who: "hero", type: "walk",  direction: "down" },
+  //    { who: "hero", type: "walk",  direction: "down" },
+  //    { who: "npcA", type: "walk",  direction: "left" },
+  //    { who: "npcA", type: "walk",  direction: "left" },
+  //    { who: "npcA", type: "walk",  direction: "left" },
+  //    { who: "npcA", type: "stand",  direction: "up", time: 800 },
+  //    {type: "textMessage", text: "hello"},
+  //  ])
  
   }
  }

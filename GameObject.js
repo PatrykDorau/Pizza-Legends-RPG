@@ -12,6 +12,8 @@ class GameObject {
 
     this.behaviorLoop = config.behaviorLoop || [];
     this.behaviorLoopIndex = 0;
+
+    this.talking = config.talking || [];
   }
 
   mount(map) {
@@ -29,12 +31,11 @@ class GameObject {
 
   async doBehaviorEvent(map) {
 
-    if(map.isCutScenePlaying || this.behaviorLoop.length === 0) {
+    if(map.isCutScenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
       return;
     }
 
     let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
-    console.log(eventConfig, this.behaviorLoopIndex);
     // id tworzymy w mountObjects() za pomocą key'a
     eventConfig.who = this.id;
 
@@ -42,7 +43,7 @@ class GameObject {
     const eventHandler = new OverworldEvent({map, event: eventConfig});
     await eventHandler.init();
 
-    // kod poniżej wykona się dopiero gdy wróci odpowiedz od promisa wyzej!
+    // kod poniżej wykona się dopiero gdy wróci resolve od promisa wyzej!
 
     this.behaviorLoopIndex += 1;
     if(this.behaviorLoopIndex === this.behaviorLoop.length) {
