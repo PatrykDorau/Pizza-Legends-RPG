@@ -67,7 +67,9 @@ class Person extends GameObject {
       this.movingProgressRemaining -= 1;
 
       if(this.movingProgressRemaining === 0) {
-        // Dajemy znac ze skonczylismy chodzic                                 SPRAWDZIC JAK DZIALA DOKLADNIE!!!!
+        // Dajemy znac ze skonczylismy chodzic po to w OverworldEven.js resolve odpalic aby eventHandler w doBehaviorEvent mógł przejsc dalej w behaviorloop
+        //                    SPRAWDZIC JAK DZIALA DOKLADNIE!!!!
+        console.log("koniec!")
         utils.emitEvent("PersonWalkingComplete", { whoId: this.id})
       }
   }
