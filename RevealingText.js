@@ -12,7 +12,6 @@ class RevealingText {
   revealOneCharacter(list) {
     const next = list.splice(0,1)[0];
     next.span.classList.add("revealed");
-    console.log(list, next)
 
     if(list.length > 0) {
       this.timeout = setTimeout(() => {
@@ -27,7 +26,7 @@ class RevealingText {
     clearTimeout(this.timeout);
     this.isDone = true;
     this.element.querySelectorAll("span").forEach((el) => {
-      el.classList.add("revealed")
+      el.classList.add("revealed");
     })
   }
 

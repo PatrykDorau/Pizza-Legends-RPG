@@ -30,6 +30,7 @@ class TextMessage {
   done() {
     if(this.revealingText.isDone) {
       this.element.remove();
+      //resolvuje Event i mozemy isc do nastepnego w do
       this.onComplete();
       this.enterListener.unbind();
     } else {

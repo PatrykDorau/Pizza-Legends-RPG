@@ -31,5 +31,14 @@ const utils = {
     if(direction === 'right') { return "left"}
     if(direction === 'up') { return "down"}
     if(direction === 'down') { return "up"}
-  }
+  },
+
+  wait(ms) {
+    return new Promise(resolve => {
+      setTimeout(() => { 
+        resolve();
+      }, ms)
+    })
+  },
+
 }
