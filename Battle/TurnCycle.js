@@ -11,6 +11,7 @@ class TurnCycle {
     const enemyId = this.battle.activeCombatants[this.currentTeam === "player" ? "enemy" : "player"];
     const enemy = this.battle.combatants[enemyId]
 
+    // tutaj tworzymy cale menu wyboru akcji, i czekamy az caster zatwierdzi akcje 
     const submission = await this.onNewEvent({
       type: "submissionMenu", 
       caster,
@@ -20,7 +21,7 @@ class TurnCycle {
 
     // czy caster da rade trafic, jesli tak to zostaje submission.action.succes a jesli nie to dajemy textmsg
     const resultingEvents = caster.getReplacedEvents(submission.action.success);
-    // Eventy które maja dziac sie najpierw
+    // Eventy które maja dziac sie najpierw z wybranej przez castera akcji
     for (let i = 0; i < resultingEvents.length; i++) {
       const event = {
         ...resultingEvents[i],
@@ -32,7 +33,7 @@ class TurnCycle {
       await this.onNewEvent(event)
     }
 
-    // Eventy ktore maja dziac sie pozniej (status)\ getPostEvents w combatant.js
+    // Eventy ktore maja dziac sie pozniej czyli rozpatrujemy status \ getPostEvents w combatant.js
     const postEvents = caster.getPostEvents();
     for (let i = 0; i < postEvents.length; i++) {
       const event = {
@@ -55,10 +56,10 @@ class TurnCycle {
   }
 
   async init() {
-    await this.onNewEvent({
-      type: "textMessage",
-      text: "Battle is starting!!!"
-    });
+    // await this.onNewEvent({
+    //   type: "textMessage",
+    //   text: "Battle is starting!!!"
+    // });
     //zaczynamy pierwsza turę!
     this.turn()
   }

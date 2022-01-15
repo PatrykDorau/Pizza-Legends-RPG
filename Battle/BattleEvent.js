@@ -25,9 +25,6 @@ class BattleEvent {
     console.log(this.event, "event")
     const {caster, target, damage, recover, status, action} = this.event
     let who = this.event.onCaster ? caster : target;
-    if(action.targetType ==="friendly") {
-      who = caster;
-    }
 
     if(damage) {
       target.update({
