@@ -66,7 +66,7 @@ class OverworldMap {
     const match = Object.values(this.gameObjects).find(object => {
       return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
     })
-    console.log(match)
+    
     if(!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events)
     }

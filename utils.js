@@ -33,6 +33,10 @@ const utils = {
     if(direction === 'down') { return "up"}
   },
 
+  randomFromArray(array) {
+    return array[Math.floor(Math.random() * array.length)]
+  },
+
   wait(ms) {
     return new Promise(resolve => {
       setTimeout(() => { 

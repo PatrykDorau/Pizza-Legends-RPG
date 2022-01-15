@@ -17,7 +17,10 @@ class TurnCycle {
       enemy
     })
     console.log(submission)
-    const resultingEvents = submission.action.success;
+
+    // czy caster da rade trafic, jesli tak to zostaje submission.action.succes a jesli nie to dajemy textmsg
+    const resultingEvents = caster.getReplacedEvents(submission.action.success);
+    // Eventy które maja dziac sie najpierw
     for (let i = 0; i < resultingEvents.length; i++) {
       const event = {
         ...resultingEvents[i],
@@ -29,6 +32,24 @@ class TurnCycle {
       await this.onNewEvent(event)
     }
 
+    // Eventy ktore maja dziac sie pozniej (status)\ getPostEvents w combatant.js
+    const postEvents = caster.getPostEvents();
+    for (let i = 0; i < postEvents.length; i++) {
+      const event = {
+        ...postEvents[i],
+        submission,
+        action: submission.action,
+        caster,
+        target: submission.target
+      }
+      await this.onNewEvent(event)
+    }
+    //Sprawdz czy status nie wygasl. w combatant.js 
+    const expiredEvent = caster.decrementStatus();
+    if(expiredEvent) {
+      await this.onNewEvent(expiredEvent)
+    }
+
     this.currentTeam = this.currentTeam === "player" ? "enemy" : "player";
     this.turn()
   }
@@ -36,7 +57,7 @@ class TurnCycle {
   async init() {
     await this.onNewEvent({
       type: "textMessage",
-      text: "battle is starting"
+      text: "Battle is starting!!!"
     });
     //zaczynamy pierwsza turę!
     this.turn()
