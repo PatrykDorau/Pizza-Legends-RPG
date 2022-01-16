@@ -85,7 +85,7 @@ class Combatant {
 
   getReplacedEvents(originalEvents) {
     
-    if(this.status?.type === "clumsy" && utils.randomFromArray([true, false, false, false])) {
+    if(this.status?.type === "clumsy" && utils.randomFromArray([true, false])) {
       return [
         {type:"textMessage", text: "{CASTER} flops over!"},
       ]

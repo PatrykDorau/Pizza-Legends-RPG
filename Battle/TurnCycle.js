@@ -19,6 +19,11 @@ class TurnCycle {
     })
     console.log(submission)
 
+    // Sprawdzamy czy pprzyszedl instance w submission, jesli tak to wyrzucamy ten item z tablicy itemow
+    if(submission.instanceId) {
+      this.battle.items = this.battle.items.filter( i => i.instanceId !== submission.instanceId)
+    }
+
     // czy caster da rade trafic, jesli tak to zostaje submission.action.succes a jesli nie to dajemy textmsg
     const resultingEvents = caster.getReplacedEvents(submission.action.success);
     // Eventy które maja dziac sie najpierw z wybranej przez castera akcji

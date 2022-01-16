@@ -31,6 +31,10 @@
   right:0;
   top:0;
   bottom:0;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  padding-right: 3px;
  }
 
  .DescriptionBox {
