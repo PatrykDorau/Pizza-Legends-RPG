@@ -19,7 +19,21 @@ class TurnCycle {
     })
     console.log(submission)
 
-    // Sprawdzamy czy pprzyszedl instance w submission, jesli tak to wyrzucamy ten item z tablicy itemow
+    //Zatrzymaj tutaj jeśli zmieniamy pizze
+    if(submission.replacement) {
+      await this.onNewEvent({
+        type: "replace",
+        replacement: submission.replacement
+      })
+      await this.onNewEvent({
+        type: "textMessage",
+        text: `Go get them, ${submission.replacement.name}!`
+      })
+      this.nextTurn();
+      return;
+    }
+
+    // Sprawdzamy czy przyszedl instance w submission, jesli tak to wyrzucamy ten item z tablicy itemow
     if(submission.instanceId) {
       this.battle.items = this.battle.items.filter( i => i.instanceId !== submission.instanceId)
     }
@@ -36,6 +50,41 @@ class TurnCycle {
         target: submission.target
       }
       await this.onNewEvent(event)
+    }
+
+    //Sprawdzamy czy cel umarł
+    const targetDead = submission.target.hp <=0;
+    if (targetDead) {
+      await this.onNewEvent({
+        type: "textMessage", text: `${submission.target.name} just get eaten by the enemy`
+      })
+    }
+
+    //Sprawdzamy czy jest juz wygrany. Jesli tak to konczymy walke jesli nie to wrzucamy drugą pizze
+
+    const winner = this.getWinningTeam();
+    if(winner) {
+      await this.onNewEvent({
+        type: "textMessage",
+        text: `Winner!`
+      })
+
+      return;
+    }
+
+    if (targetDead) {
+      const replacement = await this.onNewEvent({
+        type: "replacementMenu",
+        team: submission.target.team
+      })
+      await this.onNewEvent({
+        type: "replace",
+        replacement: replacement
+      })
+      await this.onNewEvent({
+        type: "textMessage",
+        text: `${replacement.name}, appears!`
+      })
     }
 
     // Eventy ktore maja dziac sie pozniej czyli rozpatrujemy status \ getPostEvents w combatant.js
@@ -56,8 +105,23 @@ class TurnCycle {
       await this.onNewEvent(expiredEvent)
     }
 
+    this.nextTurn();
+  }
+
+  nextTurn() {
     this.currentTeam = this.currentTeam === "player" ? "enemy" : "player";
-    this.turn()
+    this.turn();
+  }
+
+  getWinningTeam() {
+    let aliveTeams = {}
+    Object.values(this.battle.combatants).forEach(c => {
+      if(c.hp > 0) {
+        aliveTeams[c.team] = true;
+      }
+    })
+    if(!aliveTeams["player"]) {return "enemy"};
+    if(!aliveTeams["enemy"]) {return "player"};
   }
 
   async init() {

@@ -5,6 +5,7 @@ class BattleEvent {
   }
 
   textMessage(resolve) {
+    console.log(this.event.text);
 
     const text = this.event.text
     .replace("{CASTER}", this.event.caster?.name)
@@ -61,16 +62,52 @@ class BattleEvent {
   }
 
   submissionMenu(resolve) {
+    const {caster} = this.event;
     const menu = new SubmissionMenu({
-      caster: this.event.caster,
+      caster: caster,
       enemy: this.event.enemy,
       items: this.battle.items,
+      replacements: Object.values(this.battle.combatants).filter(c => {
+        return c.id !== caster.id && c.team === caster.team && c.hp > 0
+      }),
       onComplete: submission => {
         // submission - co użyc i na kogo
         resolve(submission);
       }
     })
     menu.init(this.battle.element)
+  }
+
+  replacementMenu(resolve) {
+    const menu = new ReplacementMenu({
+      replacements: Object.values(this.battle.combatants).filter(c => {
+        return c.team === this.event.team && c.hp > 0
+      }),
+      onComplete: replacement => {
+        resolve(replacement);
+      }
+    })
+
+    menu.init(this.battle.element)
+  }
+
+  async replace(resolve) {
+    const {replacement} = this.event;
+
+    const prevCombatant = this.battle.combatants[this.battle.activeCombatants[replacement.team]]
+    this.battle.activeCombatants[replacement.team] = null;
+    console.log(prevCombatant, "prev")
+    prevCombatant.update();
+
+    await utils.wait(400);
+
+    //wchodzi nowa pizza
+    this.battle.activeCombatants[replacement.team] = replacement.id;
+    replacement.update();
+
+    await utils.wait(400);
+
+    resolve();
   }
 
   animation(resolve) {
