@@ -110,7 +110,7 @@ window.OverworldMaps = {
       npcA: new Person({
         x: utils.withGrid(5),
         y: utils.withGrid(8),
-        src: "images/characters/people/npc2.png",
+        src: "images/characters/people/npc1.png",
         behaviorLoop: [
           { type: "stand",  direction: "left", time: 4000 },
           { type: "stand",  direction: "up", time: 4000 },
@@ -121,8 +121,9 @@ window.OverworldMaps = {
           {
             events: [
               {type: "textMessage", text: "im busy...", faceHero: "npcA"},
-              {type: "textMessage", text: "go away!"},
-              { who:"npcA", type: "walk",  direction: "down" },
+              {type: "battle", enemyId: "beth"},
+              // {type: "textMessage", text: "go away!"},
+              // { who:"npcA", type: "walk",  direction: "up" },
             ]
           }
         ]
@@ -130,7 +131,7 @@ window.OverworldMaps = {
       npcB: new Person({
         x: utils.withGrid(8),
         y: utils.withGrid(5),
-        src: "images/characters/people/npc3.png",
+        src: "images/characters/people/erio.png",
         behaviorLoop: [
           { type: "walk",  direction: "right" },
           { type: "stand",  direction: "left", time: 4000 },
@@ -147,6 +148,16 @@ window.OverworldMaps = {
           { type: "walk",  direction: "right" },
           { type: "walk",  direction: "right" },
 
+        ],
+        talking: [
+          {
+            events: [
+              {type: "textMessage", text: "don't get into my way!", faceHero: "npcB"},
+              {type: "battle", enemyId: "erio"},
+              // {type: "textMessage", text: "go away!"},
+              // { who:"npcA", type: "walk",  direction: "up" },
+            ]
+          }
         ]
       }),
     },

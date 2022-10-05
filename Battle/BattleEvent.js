@@ -116,6 +116,31 @@ class BattleEvent {
     resolve();
   }
 
+  giveXp(resolve) {
+    let amount = this.event.xp;
+    const {combatant} = this.event;
+    const step = () => {
+      if(amount > 0) {
+        amount -= 1;
+        combatant.xp += 1;
+
+        if(combatant.xp === combatant.maxXp) {
+          combatant.xp = 0;
+          combatant.maxXP = 100;
+          combatant.level += 1;
+          combatant.maxHp += 15;
+          combatant.hp = combatant.maxHp;
+        }
+
+        combatant.update();
+        requestAnimationFrame(step);
+        return;
+      }
+      resolve();
+    }
+    requestAnimationFrame(step);
+  }
+
   animation(resolve) {
     const func = BattleAnimations[this.event.animation]
     func(this.event, resolve);

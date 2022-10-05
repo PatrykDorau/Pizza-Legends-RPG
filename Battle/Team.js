@@ -27,7 +27,6 @@ class Team {
           <path class="dead-pizza" stroke="#c4bdae" d="M3 2h1M1 3h2M4 3h2M1 4h1M3 4h1M5 4h1M2 5h3" />
         </svg> 
       `)
-      //Add to parent element
       this.element.appendChild(icon)
     })
   }

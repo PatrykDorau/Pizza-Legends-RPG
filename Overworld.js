@@ -63,7 +63,7 @@ class Overworld {
   }
  
   init() {
-   this.startMap(window.OverworldMaps.Kitchen);
+   this.startMap(window.OverworldMaps.DemoRoom);
 
    this.bindActionInput();
    this.bindHeroPositionCheck();
@@ -72,11 +72,14 @@ class Overworld {
    this.directionInput.init();
  
    this.startGameLoop();
+
  
    this.map.startCutScene([
-     {type: "battle"}
+    //  {type: "battle", enemyId: "beth"}
     //  {type: "changeMap", map: "DemoRoom"},
-    //  {type: "textMessage", text: "hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello"},
+     {type: "textMessage", text: "First day in pizza legends, huh?"},
+     {type: "textMessage", text: "Use arrows to move, and enter to talk to people"},
+     {type: "textMessage", text: "go ahead, try it out!"},
    ])
  
   }
