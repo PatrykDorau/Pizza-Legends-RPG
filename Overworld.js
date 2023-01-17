@@ -63,24 +63,25 @@ class Overworld {
   }
  
   init() {
-   this.startMap(window.OverworldMaps.DemoRoom);
+    this.hud = new Hud();
+    this.hud.init(document.querySelector(".game-container"));
+    this.startMap(window.OverworldMaps.DemoRoom);
 
-   this.bindActionInput();
-   this.bindHeroPositionCheck();
+    this.bindActionInput();
+    this.bindHeroPositionCheck();
+  
+    this.directionInput = new DirectionInput();
+    this.directionInput.init();
  
-   this.directionInput = new DirectionInput();
-   this.directionInput.init();
- 
-   this.startGameLoop();
+    this.startGameLoop();
 
  
-   this.map.startCutScene([
+    this.map.startCutScene([
     //  {type: "battle", enemyId: "beth"}
     //  {type: "changeMap", map: "DemoRoom"},
      {type: "textMessage", text: "First day in pizza legends, huh?"},
      {type: "textMessage", text: "Use arrows to move, and enter to talk to people"},
      {type: "textMessage", text: "go ahead, try it out!"},
-   ])
- 
+    ])
   }
  }

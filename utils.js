@@ -22,6 +22,7 @@ const utils = {
   },
 
   emitEvent(name, detail) {
+    console.log("event", name)
     const event = new CustomEvent(name, {detail});
     document.dispatchEvent(event);
   },

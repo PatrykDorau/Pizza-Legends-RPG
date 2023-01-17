@@ -18,7 +18,6 @@ class TurnCycle {
       caster,
       enemy
     })
-    console.log(submission, "submission")
 
     //Zatrzymaj tutaj jeśli zmieniamy pizze
     if(submission.replacement) {

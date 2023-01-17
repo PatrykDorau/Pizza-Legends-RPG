@@ -111,6 +111,9 @@ class Battle {
           playerState.items = playerState.items.filter(item => {
             return !this.usedInstanceIds[item.instanceId]
           })
+
+          //Wysłać sygnał żeby zaktualizować hud
+          utils.emitEvent("PlayerStateUpdate");
         }
         this.element.remove();
         this.onComplete();

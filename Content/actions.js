@@ -1,7 +1,7 @@
 window.actions = {
   damage1: {
     name: "Whomp!",
-    description: "Spill tabasko on enemy! ",
+    description: "Spill tabasko on enemy! Deal 10 dmg",
     success: [
       {type: "textMessage", text: " {CASTER} uses {ACTION} on {TARGET}!"},
       {type: "animation", animation: "spin"},

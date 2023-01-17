@@ -7,7 +7,7 @@ class Combatant {
       this[key] = config[key];
     })
 
-    this.hp = typeof(this.hp) === "undefined" ? this.maxHp : this.hp
+    this.hp = typeof(this.hp) === "undefined" ? this.maxHp : this.hp;
   }
 
   get hpPercent() {
@@ -20,7 +20,7 @@ class Combatant {
   }
 
   get isActive() {
-    return this.battle.activeCombatants[this.team] === this.id
+    return this.battle?.activeCombatants[this.team] === this.id
   }
 
   get givesXp() {
