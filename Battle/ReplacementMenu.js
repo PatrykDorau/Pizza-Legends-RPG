@@ -15,7 +15,6 @@ class ReplacementMenu {
 
   showMenu(container) {
     this.keyboardMenu = new KeyboardMenu();
-    console.log(this.replacements, "key")
     this.keyboardMenu.init(container);
     this.keyboardMenu.setOptions(this.replacements.map(c => {
       return {

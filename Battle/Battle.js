@@ -3,7 +3,6 @@ class Battle {
 
     this.enemy = enemy;
     this.onComplete = onComplete;
-    console.log(enemy, "enemy")
 
     this.combatants = {}
     
@@ -18,7 +17,6 @@ class Battle {
       this.addCombatant(id, "player", window.playerState.pizzas[id]);
     })
 
-    console.log(this.enemy, "enemy")
     //dodajemy przeciwnika
     Object.keys(this.enemy.pizzas).forEach(key => {
       this.addCombatant("e_" + key, "enemy", this.enemy.pizzas[key]);

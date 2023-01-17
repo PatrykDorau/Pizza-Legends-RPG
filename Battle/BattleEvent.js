@@ -5,8 +5,6 @@ class BattleEvent {
   }
 
   textMessage(resolve) {
-    console.log(this.event.text);
-
     const text = this.event.text
     .replace("{CASTER}", this.event.caster?.name)
     .replace("{TARGET}", this.event.target?.name)
@@ -23,7 +21,6 @@ class BattleEvent {
 
   async stateChange(resolve) {
     // destructure this.caster = this.event.caster np.
-    console.log(this.event, "event")
     const {caster, target, damage, recover, status, action} = this.event
     let who = this.event.onCaster ? caster : target;
 
@@ -99,7 +96,6 @@ class BattleEvent {
 
     const prevCombatant = this.battle.combatants[this.battle.activeCombatants[replacement.team]]
     this.battle.activeCombatants[replacement.team] = null;
-    console.log(prevCombatant, "prev")
     prevCombatant.update();
 
     await utils.wait(400);

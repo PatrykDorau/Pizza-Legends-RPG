@@ -76,12 +76,12 @@ class Overworld {
     this.startGameLoop();
 
  
-    this.map.startCutScene([
-    //  {type: "battle", enemyId: "beth"}
-    //  {type: "changeMap", map: "DemoRoom"},
-     {type: "textMessage", text: "First day in pizza legends, huh?"},
-     {type: "textMessage", text: "Use arrows to move, and enter to talk to people"},
-     {type: "textMessage", text: "go ahead, try it out!"},
-    ])
+    // this.map.startCutScene([
+    // //  {type: "battle", enemyId: "beth"}
+    // //  {type: "changeMap", map: "DemoRoom"},
+    //  {type: "textMessage", text: "First day in pizza legends, huh?"},
+    //  {type: "textMessage", text: "Use arrows to move, and enter to talk to people"},
+    //  {type: "textMessage", text: "go ahead, try it out!"},
+    // ])
   }
  }

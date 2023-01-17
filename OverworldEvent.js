@@ -60,7 +60,6 @@ class OverworldEvent {
   }
 
   changeMap(resolve) {
-    console.log("done1!", document.querySelector(".game-container"))
     const sceneTransition = new SceneTransition();
     sceneTransition.init(document.querySelector(".game-container"), () => {
       this.map.overworld.startMap(window.OverworldMaps[this.event.map]);
@@ -71,8 +70,6 @@ class OverworldEvent {
   }
 
   battle(resolve) {
-    console.log("battle", this)
-    console.log("battle", Enemies[this.event.enemyId])
     const battle = new Battle({
       enemy: Enemies[this.event.enemyId],
       onComplete: () => {resolve()}

@@ -22,7 +22,6 @@ class SubmissionMenu {
       }
     })
     this.items = Object.values(quantityMap);
-    console.log(this.items);
   }
 
   getPages() {
@@ -61,7 +60,6 @@ class SubmissionMenu {
       attacks: [
         ...this.caster.actions.map(key => {
           const action = actions[key];
-          console.log(action, "action")
           return {
             label: action.name,
             description: action.description,
@@ -75,7 +73,6 @@ class SubmissionMenu {
       items: [
         ...this.items.map(item => {
           const action = actions[item.actionId];
-          console.log(action, "action")
           return {
             label: action.name,
             description: action.description,
